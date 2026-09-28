@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SolarGrid | Community Energy</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7f6;
+            color: #172b2a;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 220px;
+            height: 100vh;
+
+            background: #102f2d;
+            color: white;
+
+            padding: 28px 18px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 0 10px;
+            margin-bottom: 45px;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+
+            background: #f4b942;
+            color: #102f2d;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .brand h2 {
+            font-size: 17px;
+        }
+
+        .brand p {
+            font-size: 9px;
+            color: #a7c2be;
+            margin-top: 3px;
+        }
+
+        .menu-title {
+            font-size: 10px;
+            color: #7fa39e;
+            padding: 0 12px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .menu a {
+            display: block;
+
+            text-decoration: none;
+            color: #a9c3bf;
+
+            padding: 12px;
+
+            margin: 4px 0;
+
+            font-size: 13px;
+
+            border-radius: 5px;
+
+            transition: 0.2s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #245a53;
+            color: white;
+        }
+
+        .menu a span {
+            margin-right: 10px;
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 25px;
+            left: 20px;
+            right: 20px;
+
+            border-top: 1px solid #28504c;
+
+            padding-top: 18px;
+
+            font-size: 11px;
+            color: #86aaa5;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 220px;
+            padding: 30px 38px;
+        }
+
+        /* ================= TOPBAR ================= */
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 32px;
+        }
+
+        .page-label {
+            color: #a16a24;
+            font-size: 9px;
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 8px;
+        }
+
+        .topbar h1 {
+            font-size: 27px;
+            font-weight: 600;
+            color: #152d2b;
+        }
+
+        .user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+
+            background: #26776c;
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            background: #dceee7;
+
+            border-left: 3px solid #16856f;
+
+            padding: 32px;
+
+            min-height: 180px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 18px;
+        }
+
+        .hero small {
+            color: #c8792b;
+
+            font-size: 9px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+        }
+
+        .hero h2 {
+            font-size: 27px;
+
+            line-height: 1.3;
+
+            margin: 9px 0;
+
+            max-width: 500px;
+        }
+
+        .hero p {
+            font-size: 12px;
+
+            color: #52706b;
+
+            max-width: 500px;
+
+            line-height: 1.7;
+        }
+
+        .hero button {
+            background: #197866;
+
+            color: white;
+
+            border: none;
+
+            padding: 13px 20px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            border-radius: 4px;
+        }
+
+        .hero button:hover {
+            background: #125f52;
+        }
+
+        /* ================= STAT CARDS ================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 12px;
+
+            margin-bottom: 32px;
+        }
+
+        .stat {
+            background: white;
+
+            border: 1px solid #dce3e0;
+
+            padding: 20px;
+
+            min-height: 105px;
+        }
+
+        .stat-title {
+            font-size: 11px;
+
+            color: #657875;
+
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+
+            font-weight: 600;
+
+            color: #182e2c;
+        }
+
+        .stat-unit {
+            font-size: 10px;
+
+            color: #8b9b98;
+
+            margin-left: 3px;
+        }
+
+        .stat-info {
+            font-size: 9px;
+
+            color: #81918e;
+
+            margin-top: 5px;
+        }
+
+        /* ================= SECTION ================= */
+
+        .section-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 13px;
+        }
+
+        .section-header small {
+            color: #c8792b;
+
+            font-size: 9px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+        }
+
+        .section-header h2 {
+            font-size: 18px;
+
+            margin-top: 5px;
+        }
+
+        .view-all {
+            color: #167664;
+
+            font-size: 11px;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        /* ================= ACTIVITY ================= */
+
+        .activity {
+            background: white;
+
+            border: 1px solid #dce3e0;
+
+            margin-bottom: 25px;
+        }
+
+        .activity-row {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1.3fr 1fr 1fr 1fr;
+
+            padding: 16px 18px;
+
+            border-bottom: 1px solid #edf0ef;
+
+            font-size: 12px;
+
+            align-items: center;
+        }
+
+        .activity-row:last-child {
+            border-bottom: none;
+        }
+
+        .activity-header {
+            background: #f7f9f8;
+
+            color: #778582;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+        }
+
+        .status {
+            color: #17745f;
+
+            font-size: 10px;
+
+            font-weight: 600;
+        }
+
+        .empty {
+            text-align: center;
+
+            padding: 35px;
+
+            color: #8a9693;
+
+            font-size: 12px;
+        }
+
+        /* ================= FORMS ================= */
+
+        .forms {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+
+            margin-top: 30px;
+        }
+
+        .form-box {
+            background: white;
+
+            border: 1px solid #dce3e0;
+
+            padding: 22px;
+        }
+
+        .form-box h3 {
+            font-size: 16px;
+
+            margin-bottom: 5px;
+        }
+
+        .form-box p {
+            font-size: 11px;
+
+            color: #7a8986;
+
+            margin-bottom: 18px;
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 11px;
+
+            border: 1px solid #d8e0dd;
+
+            background: #fbfcfc;
+
+            font-size: 12px;
+
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #258272;
+        }
+
+        .form-button {
+            width: 100%;
+
+            margin-top: 12px;
+
+            padding: 11px;
+
+            background: #197866;
+
+            color: white;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+        .form-button:hover {
+            background: #125f52;
+        }
+
+        .form-status {
+            text-align: center;
+
+            margin-top: 8px;
+
+            font-size: 11px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+
+            padding: 28px;
+
+            color: #8a9693;
+
+            font-size: 10px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 900px) {
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .forms {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media(max-width: 650px) {
+
+            .sidebar {
+                width: 65px;
+
+                padding: 20px 8px;
+            }
+
+            .brand h2,
+            .brand p,
+            .menu-title,
+            .menu a span:last-child,
+            .sidebar-bottom {
+                display: none;
+            }
+
+            .brand {
+                justify-content: center;
+            }
+
+            .main {
+                margin-left: 65px;
+
+                padding: 20px;
+            }
+
+            .hero {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .activity {
+                overflow-x: auto;
+            }
+
+            .activity-row {
+                min-width: 600px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            ☀
+        </div>
+
+        <div>
+
+            <h2>SolarGrid</h2>
+
+            <p>Community Energy</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="menu-title">
+        Workspace
+    </div>
+
+
+    <nav class="menu">
+
+        <a href="#" class="active">
+            <span>▣</span>
+            Overview
+        </a>
+
+        <a href="#generation">
+            <span>☀</span>
+            Generation
+        </a>
+
+        <a href="#consumption">
+            <span>⚡</span>
+            Consumption
+        </a>
+
+        <a href="#trading">
+            <span>↔</span>
+            P2P Trading
+        </a>
+
+        <a href="#history">
+            <span>▤</span>
+            Trade History
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        Community Solar Network<br>
+
+        <b>● System Online</b>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <div class="page-label">
+                COMMUNITY ENERGY PLATFORM
+            </div>
+
+            <h1>Your energy overview</h1>
+
+        </div>
+
+
+        <div class="user">
+
+            <div>
+
+                <b>Dharu</b><br>
+
+                <small>Prosumer</small>
+
+            </div>
+
+            <div class="avatar">
+                D
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div>
+
+            <small>
+                LIVE ACCOUNT VIEW
+            </small>
+
+            <h2>
+                Power your community<br>
+                with clean energy.
+            </h2>
+
+            <p>
+                Monitor solar generation, track household
+                consumption and exchange surplus electricity
+                through peer-to-peer energy trading.
+            </p>
+
+        </div>
+
+
+        <button onclick="document.getElementById('trading').scrollIntoView()">
+
+            Start a trade →
+
+        </button>
+
+    </section>
+
+
+    <!-- ================= STATS ================= -->
+
+    <section class="stats">
+
+
+        <div class="stat" id="generation">
+
+            <div class="stat-title">
+                Solar Generation
+            </div>
+
+            <span class="stat-value" id="generationValue">
+                0
+            </span>
+
+            <span class="stat-unit">
+                kWh
+            </span>
+
+            <div class="stat-info">
+                Total energy generated
+            </div>
+
+        </div>
+
+
+        <div class="stat" id="consumption">
+
+            <div class="stat-title">
+                Energy Consumption
+            </div>
+
+            <span class="stat-value" id="consumptionValue">
+                0
+            </span>
+
+            <span class="stat-unit">
+                kWh
+            </span>
+
+            <div class="stat-info">
+                Household usage
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                Available Surplus
+            </div>
+
+            <span class="stat-value" id="surplusValue">
+                0
+            </span>
+
+            <span class="stat-unit">
+                kWh
+            </span>
+
+            <div class="stat-info">
+                Available for trading
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                Energy Traded
+            </div>
+
+            <span class="stat-value" id="tradedValue">
+                0
+            </span>
+
+            <span class="stat-unit">
+                kWh
+            </span>
+
+            <div class="stat-info">
+                Community exchanges
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ================= ACTIVITY ================= -->
+
+    <section id="history">
+
+        <div class="section-header">
+
+            <div>
+
+                <small>
+                    RECENT ACTIVITY
+                </small>
+
+                <h2>
+                    Latest energy trades
+                </h2>
+
+            </div>
+
+            <a href="#trading" class="view-all">
+                Create trade
+            </a>
+
+        </div>
+
+
+        <div class="activity">
+
+            <div class="activity-row activity-header">
+
+                <div>Trade</div>
+
+                <div>Participants</div>
+
+                <div>Energy</div>
+
+                <div>Date</div>
+
+                <div>Status</div>
+
+            </div>
+
+
+            <div id="tradeRows">
+
+                <div class="empty">
+                    No recent trades found.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FORMS ================= -->
+
+    <section class="forms">
+
+
+        <!-- CONSUMPTION -->
+
+        <div class="form-box" id="consumptionForm">
+
+            <h3>
+                Record consumption
+            </h3>
+
+            <p>
+                Add a household energy consumption record.
+            </p>
+
+
+            <div class="form-grid">
+
+                <input
+                        type="number"
+                        id="consumptionUserId"
+                        placeholder="User ID">
+
+
+                <input
+                        type="number"
+                        step="0.1"
+                        id="consumptionAmount"
+                        placeholder="Energy (kWh)">
+
+
+                <input
+                        type="date"
+                        id="consumptionDate">
+
+            </div>
+
+
+            <button
+                    class="form-button"
+                    onclick="addConsumption()">
+
+                Record consumption
+
+            </button>
+
+
+            <div
+                    class="form-status"
+                    id="consumptionStatus">
+            </div>
+
+        </div>
+
+
+        <!-- TRADE -->
+
+        <div class="form-box" id="trading">
+
+            <h3>
+                Create P2P trade
+            </h3>
+
+            <p>
+                Transfer surplus solar energy to another household.
+            </p>
+
+
+            <div class="form-grid">
+
+                <input
+                        type="number"
+                        id="sellerId"
+                        placeholder="Seller ID">
+
+
+                <input
+                        type="number"
+                        id="buyerId"
+                        placeholder="Buyer ID">
+
+
+                <input
+                        type="number"
+                        step="0.1"
+                        id="energyAmount"
+                        placeholder="Energy (kWh)">
+
+
+                <input
+                        type="number"
+                        step="0.1"
+                        id="price"
+                        placeholder="Price">
+
+
+                <input
+                        type="date"
+                        id="tradeDate">
+
+            </div>
+
+
+            <button
+                    class="form-button"
+                    onclick="createTrade()">
+
+                Execute energy trade
+
+            </button>
+
+
+            <div
+                    class="form-status"
+                    id="tradeStatus">
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <footer>
+
+        SolarGrid Community Energy Platform
+        · P2P Renewable Energy Management
+
+    </footer>
+
+
+</main>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    async function loadGeneration() {
+
+        const response =
+            await fetch("/generation");
+
+        const data =
+            await response.json();
+
+        const total =
+            data.reduce(
+                (sum, item) =>
+                    sum + Number(item.energyGenerated || 0),
+                0
+            );
+
+        document.getElementById("generationValue")
+            .innerText = total.toFixed(2);
+    }
+
+
+    async function loadConsumption() {
+
+        const response =
+            await fetch("/consumption");
+
+        const data =
+            await response.json();
+
+        const total =
+            data.reduce(
+                (sum, item) =>
+                    sum + Number(item.energyConsumed || 0),
+                0
+            );
+
+        document.getElementById("consumptionValue")
+            .innerText = total.toFixed(2);
+    }
+
+
+    async function loadSurplus() {
+
+        const response =
+            await fetch("/energy/surplus/1");
+
+        const value =
+            await response.json();
+
+        document.getElementById("surplusValue")
+            .innerText = Number(value).toFixed(2);
+    }
+
+
+    async function loadTraded() {
+
+        const response =
+            await fetch("/trades");
+
+        const trades =
+            await response.json();
+
+        const total =
+            trades.reduce(
+                (sum, item) =>
+                    sum + Number(item.energyAmount || 0),
+                0
+            );
+
+        document.getElementById("tradedValue")
+            .innerText = total.toFixed(2);
+
+
+        const rows =
+            document.getElementById("tradeRows");
+
+        if (trades.length === 0) {
+
+            rows.innerHTML = `
+                <div class="empty">
+                    No recent trades found.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        rows.innerHTML = "";
+
+
+        trades.slice().reverse().forEach(trade => {
+
+            rows.innerHTML += `
+
+                <div class="activity-row">
+
+                    <div>
+                        #${trade.tradeId}
+                    </div>
+
+                    <div>
+                        User ${trade.sellerId}
+                        →
+                        User ${trade.buyerId}
+                    </div>
+
+                    <div>
+                        ${trade.energyAmount} kWh
+                    </div>
+
+                    <div>
+                        ${trade.date}
+                    </div>
+
+                    <div class="status">
+                        ● Completed
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
+    }
+
+
+    async function addConsumption() {
+
+        const userId =
+            document.getElementById(
+                "consumptionUserId"
+            ).value;
+
+        const energyConsumed =
+            document.getElementById(
+                "consumptionAmount"
+            ).value;
+
+        const date =
+            document.getElementById(
+                "consumptionDate"
+            ).value;
+
+
+        const response =
+            await fetch("/consumption", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    userId: Number(userId),
+
+                    energyConsumed:
+                        Number(energyConsumed),
+
+                    date: date
+
+                })
+
+            });
+
+
+        if (response.ok) {
+
+            document.getElementById(
+                "consumptionStatus"
+            ).innerText =
+                "✓ Consumption recorded successfully.";
+
+            loadConsumption();
+            loadSurplus();
+
+        } else {
+
+            document.getElementById(
+                "consumptionStatus"
+            ).innerText =
+                "✕ Failed to record consumption.";
+
+        }
+
+    }
+
+
+    async function createTrade() {
+
+        const sellerId =
+            document.getElementById("sellerId").value;
+
+        const buyerId =
+            document.getElementById("buyerId").value;
+
+        const energyAmount =
+            document.getElementById("energyAmount").value;
+
+        const price =
+            document.getElementById("price").value;
+
+        const date =
+            document.getElementById("tradeDate").value;
+
+
+        const response =
+            await fetch("/trades", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    sellerId: Number(sellerId),
+
+                    buyerId: Number(buyerId),
+
+                    energyAmount:
+                        Number(energyAmount),
+
+                    price:
+                        Number(price),
+
+                    date: date
+
+                })
+
+            });
+
+
+        if (response.ok) {
+
+            document.getElementById(
+                "tradeStatus"
+            ).innerText =
+                "✓ Energy trade completed successfully.";
+
+            loadTraded();
+            loadSurplus();
+
+        } else {
+
+            const message =
+                await response.text();
+
+            document.getElementById(
+                "tradeStatus"
+            ).innerText =
+                "✕ " + message;
+
+        }
+
+    }
+
+
+    /* INITIAL LOAD */
+
+    loadGeneration();
+    loadConsumption();
+    loadSurplus();
+    loadTraded();
+
+</script>
+
+
+</body>
+
+</html>
